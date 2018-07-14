@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>这是一个HTML5的网页</title>
+    </head>
+    <body>
+        <button onclick="clickButton()">Click me</button>
+        <script>
+            function clickButton() {
+                console.log('click button')
+                var body = {
+                    method: "callNative:",
+                    parameter: "hello world"
+                }
+                window.webkit.messageHandlers.App.postMessage(body)
+            }
+            function nativeCallJS(message) {
+                console.log(message)
+                App.callNative(message)
+            }
+        </script>
+    </body>
+</html>

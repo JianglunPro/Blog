@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>这是一个HTML5的网页</title>
+    </head>
+    <body>
+        <button onclick="App.callNative('hello world')">Click me</button>
+        <button onclick="callNative('hello world (using oc block)')">Click me</button>
+        <script>
+            function nativeCallJS(message) {
+                console.log(message)
+                return message
+            }
+        </script>
+    </body>
+</html>
