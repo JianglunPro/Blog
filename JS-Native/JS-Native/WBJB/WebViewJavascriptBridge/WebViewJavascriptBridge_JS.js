@@ -23,7 +23,10 @@
     // 这是 js call native 用的
     // 回调字典，回调不会包含在消息实体中，而是为回调生成一个回调 id，放在消息实体中，后面用这个 id 来取回调函数
     var responseCallbacks = {};
+
     var uniqueId = 1;
+
+    // setTimeOut(xxx, 0)
     var dispatchMessagesWithTimeoutSafety = true;
 
     // 注册一个 handler, native call js 用

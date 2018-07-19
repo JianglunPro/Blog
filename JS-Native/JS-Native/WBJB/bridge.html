@@ -11,6 +11,8 @@
                 if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
                 if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
                 window.WVJBCallbacks = [callback];
+
+                // 这里会发送假请求，通知 native 加载 WebViewJavascriptBridge_JS.m 文件的 js 代码到 webview 中
                 var WVJBIframe = document.createElement('iframe');
                 WVJBIframe.style.display = 'none';
                 WVJBIframe.src = 'https://__bridge_loaded__';

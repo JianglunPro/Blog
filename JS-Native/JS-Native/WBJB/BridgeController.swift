@@ -41,6 +41,7 @@ class BridgeController: UIViewController {
                 responseCallback(p)
             }
         }
+        bridge.setWebViewDelegate(self)
     }
     
     @objc func play() {
