@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>这是一个HTML5的网页</title>
+    </head>
+    <body>
+        <button onclick="clickAlert()">alert</button>
+        <button onclick="clickConfirm()">confirm</button>
+        <button onclick="clickPrompt()">prompt</button>
+        <button onclick="fakePrompt()">fake prompt</button>
+        <script>
+            // UIWebView 不支持拦截，默认会自动转换为 UIAlertController
+            // WKWebView 默认拦截，且需要自己实现"弹框"
+            function fakePrompt() {
+                var data = {
+                    action: 'callNative',
+                    params: 'penta kill',
+                }
+                var jsonData = JSON.stringify(data)
+                var result = prompt(jsonData)
+                console.log('回调:' + result)
+            }
+            
+            function clickAlert() {
+                alert('your request is forbiden')
+            }
+            function clickConfirm() {
+                var isOK = confirm('are you ok?')
+                console.log(isOK)
+            }
+            function clickPrompt() {
+                var noise = prompt('make some noise', 'place holder')
+                console.log(noise)
+            }
+        </script>
+    </body>
+</html>

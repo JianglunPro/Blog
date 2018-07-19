@@ -1,15 +1,41 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>这是一个HTML5的网页</title>
-    </head>
+        </head>
     <body>
-        <a href="jscallnative://callNative/parameter1/parameter2">Click me</a>
+        <!-- 拦截 url 这种方案有两个问题 1.可能会丢失消息 2.可能会丢失内容  -->
+        <!-- 1.可能会丢失消息: 当连续快速发出多个跳转的时候，前面的跳转会被系统忽略，只接收到最后一个 -->
+        <!-- 2.可能会丢失内容: url 有长度限制 -->
+        <a href="jscallnative://callNative/parameter">fake request</a>
+        <button onclick="quickMuti()">multiple request: location.href</button>
+        <button onclick="iframeSrc()">multiple request: iframe.src</button>
         <script>
             function nativeCallJS(message) {
                 console.log(message)
                 return message
             }
+        function quickMuti() {
+            location.href = 'jscallnative://callNative/parameter1'
+            location.href = 'jscallnative://callNative/parameter2'
+            location.href = 'jscallnative://callNative/parameter3'
+        }
+        
+        var MyIframe = document.createElement('iframe')
+        MyIframe.style.display = 'none'
+        document.documentElement.appendChild(MyIframe)
+        
+        var MyIframe2 = document.createElement('iframe')
+        MyIframe2.style.display = 'none'
+        document.documentElement.appendChild(MyIframe2)
+        
+        function iframeSrc() {
+            MyIframe.src = "jscallnative://callNative/parameter1"
+            MyIframe.src = "jscallnative://callNative/parameter2"
+            MyIframe2.src = "jscallnative://callNative/parameter3"
+            MyIframe2.src = "jscallnative://callNative/parameter4"
+        }
         </script>
     </body>
 </html>

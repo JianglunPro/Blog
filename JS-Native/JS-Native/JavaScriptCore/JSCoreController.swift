@@ -12,7 +12,7 @@ import JavaScriptCore
 // 协议和对象都必须声明 @objc
 @objc protocol ModelJSExport: JSExport {
     
-    // 必须没有形参
+    // 必须没有实参标签
     func callNative(_ parameter: String)
     
 }

@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>这是一个HTML5的网页</title>
+    </head>
+    <body>
+        <button id="lol">call native</button>
+        <script>
+            function setupWebViewJavascriptBridge(callback) {
+                if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+                if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+                window.WVJBCallbacks = [callback];
+                var WVJBIframe = document.createElement('iframe');
+                WVJBIframe.style.display = 'none';
+                WVJBIframe.src = 'https://__bridge_loaded__';
+                document.documentElement.appendChild(WVJBIframe);
+                setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+            }
+
+            setupWebViewJavascriptBridge(function(bridge) {
+                // 注册 JS
+                bridge.registerHandler('callJS', function(data, responseCallback) {
+                    console.log("JS called with:", data)
+                    let resData = {
+                        "p1": 1,
+                        "p2": ["1", "2", "3"]
+                    }
+                    responseCallback(resData)
+                })
+
+                var button = document.getElementById('lol')
+                button.onclick = function(e) {
+                    e.preventDefault()
+                    // 调用 Native
+                    let params = {
+                        "p1": 1,
+                        "p2": ["one", "2", "3"]
+                    }
+                    bridge.callHandler('callNative', params, function responseCallback(responseData) {
+                        console.log("native call back:", responseData)
+                    })
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -14,7 +14,7 @@ class CommonController: UIViewController {
     var uiweb: UIWebView!
     var wkweb: WKWebView!
     
-    // 选择使用 UIWebView 还是 WKWebView
+    // choose using UIWebView or WKWebView
     var type: WebViewType = .UI
     enum WebViewType {
         case UI
@@ -59,24 +59,22 @@ class CommonController: UIViewController {
         }
     }
     
-    func callNative(_ p1: String, _ p2: String) {
-        print("js call native with parameters: \(p1), \(p2)")
+    func callNative(_ p: String) {
+        print("js call native with parameters: \(p)")
     }
-
+    
 }
 
 extension CommonController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if let url = request.url, url.scheme == "jscallnative" {
+        let url = request.url!
+        if url.scheme == "jscallnative" {
             let method = url.host!
             var parameters = url.pathComponents
-            let p1 = parameters[1]
-            let p2 = parameters[2]
-            
+            let p = parameters[1]
             if method == "callNative" {
-                callNative(p1, p2)
+                callNative(p)
             }
-            
             return false
         }
         return true
@@ -85,15 +83,14 @@ extension CommonController: UIWebViewDelegate {
 
 extension CommonController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url, url.scheme == "jscallnative" {
-            
-            if let method = url.host, method == "callNative" {
-                var parameters = url.pathComponents
-                let p1 = parameters[1]
-                let p2 = parameters[2]
-                callNative(p1, p2)
+        let url = navigationAction.request.url!
+        if url.scheme == "jscallnative" {
+            let method = url.host!
+            var parameters = url.pathComponents
+            let p = parameters[1]
+            if method == "callNative" {
+                callNative(p)
             }
-
             decisionHandler(.cancel)
             return
         }
