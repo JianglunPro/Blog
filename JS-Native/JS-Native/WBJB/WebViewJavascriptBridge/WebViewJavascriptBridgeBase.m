@@ -42,6 +42,7 @@ static int logMaxLength = 500;
     _uniqueId = 0;
 }
 
+// native call js 的核心方法
 - (void)sendData:(id)data responseCallback:(WVJBResponseCallback)responseCallback handlerName:(NSString*)handlerName {
     NSMutableDictionary* message = [NSMutableDictionary dictionary];
     
@@ -68,6 +69,7 @@ static int logMaxLength = 500;
     }
 
     id messages = [self _deserializeMessageJSON:messageQueueString];
+    // WVJBMessage = NSDictionary
     for (WVJBMessage* message in messages) {
         if (![message isKindOfClass:[WVJBMessage class]]) {
             NSLog(@"WebViewJavascriptBridge: WARNING: Invalid %@ received: %@", [message class], message);
@@ -76,6 +78,7 @@ static int logMaxLength = 500;
         [self _log:@"RCVD" json:message];
         
         NSString* responseId = message[@"responseId"];
+        // 如果是 native call js 的回调
         if (responseId) {
             WVJBResponseCallback responseCallback = _responseCallbacks[responseId];
             responseCallback(message[@"responseData"]);
@@ -83,6 +86,7 @@ static int logMaxLength = 500;
         } else {
             WVJBResponseCallback responseCallback = NULL;
             NSString* callbackId = message[@"callbackId"];
+            // js call native 如果有回调
             if (callbackId) {
                 responseCallback = ^(id responseData) {
                     if (responseData == nil) {

@@ -83,15 +83,15 @@
 		5C287B8921003AC30013602D /* WebViewJavascriptBridge */ = {
 			isa = PBXGroup;
 			children = (
-				5C287B8A21003AC30013602D /* WebViewJavascriptBridge_JS.js */,
-				5C287B8B21003AC30013602D /* WebViewJavascriptBridgeBase.m */,
-				5C287B8C21003AC30013602D /* WKWebViewJavascriptBridge.m */,
-				5C287B8D21003AC30013602D /* WebViewJavascriptBridge.m */,
-				5C287B8E21003AC30013602D /* WebViewJavascriptBridge_JS.h */,
-				5C287B8F21003AC30013602D /* WebViewJavascriptBridgeBase.h */,
-				5C287B9021003AC30013602D /* WebViewJavascriptBridge_JS.m */,
 				5C287B9121003AC30013602D /* WebViewJavascriptBridge.h */,
+				5C287B8D21003AC30013602D /* WebViewJavascriptBridge.m */,
 				5C287B9221003AC30013602D /* WKWebViewJavascriptBridge.h */,
+				5C287B8C21003AC30013602D /* WKWebViewJavascriptBridge.m */,
+				5C287B8F21003AC30013602D /* WebViewJavascriptBridgeBase.h */,
+				5C287B8B21003AC30013602D /* WebViewJavascriptBridgeBase.m */,
+				5C287B8E21003AC30013602D /* WebViewJavascriptBridge_JS.h */,
+				5C287B9021003AC30013602D /* WebViewJavascriptBridge_JS.m */,
+				5C287B8A21003AC30013602D /* WebViewJavascriptBridge_JS.js */,
 			);
 			path = WebViewJavascriptBridge;
 			sourceTree = "<group>";

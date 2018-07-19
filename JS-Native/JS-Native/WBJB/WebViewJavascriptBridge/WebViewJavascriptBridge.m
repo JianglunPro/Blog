@@ -184,6 +184,8 @@
         if ([_base isBridgeLoadedURL:url]) {
             [_base injectJavascriptFile];
         } else if ([_base isQueueMessageURL:url]) {
+            // WebViewJavascriptBridge._fetchQueue()
+            // 从消息队列中取出所有消息，清空队列
             NSString *messageQueueString = [self _evaluateJavascript:[_base webViewJavascriptFetchQueyCommand]];
             [_base flushMessageQueue:messageQueueString];
         } else {
